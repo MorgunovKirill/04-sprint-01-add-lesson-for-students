@@ -1,7 +1,6 @@
 import s from './DecksList.module.css'
 import { useEffect } from 'react'
-import { decksApi } from '../decks-api'
-import { setDecksAC } from '../decks-reducer'
+import { fetchDecksTC } from '../decks-reducer'
 import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { decksSelector } from '../decks-selectors'
 import { DeckItem } from './DeckItem/DeckItem'
@@ -11,9 +10,7 @@ export const DecksList = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    decksApi.getDecks().then((res) => {
-      dispatch(setDecksAC(res.data.items))
-    })
+    dispatch(fetchDecksTC())
   }, [])
 
   return (

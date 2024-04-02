@@ -1,4 +1,5 @@
-import { DeckType } from './decks-api'
+import { Dispatch } from 'redux'
+import { DeckType, decksApi } from './decks-api'
 
 const SET_DECKS_ACTION = 'SET-DECKS-ACTION'
 
@@ -20,7 +21,15 @@ export const decksReducer = (state: DecksState = initialState, action: DecksActi
   }
 }
 
-export const setDecksAC = (decks: DeckType[]) => ({ type: SET_DECKS_ACTION as const, payload: { decks } })
+export const setDecksAC = (decks: DeckType[]) => ({ type: SET_DECKS_ACTION, payload: { decks } } as const)
+
+export const fetchDecksTC = () => {
+  return (dispatch: Dispatch) => {
+    decksApi.fetchDecks().then((res) => {
+      dispatch(setDecksAC(res.data.items))
+    })
+  }
+}
 
 type DecksActionsACType = ReturnType<typeof setDecksAC>
 type DecksActions = DecksActionsACType

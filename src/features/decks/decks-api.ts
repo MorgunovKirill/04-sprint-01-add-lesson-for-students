@@ -8,7 +8,7 @@ export const instance = axios.create({
 })
 
 export const decksApi = {
-  getDecks() {
+  fetchDecks() {
     return instance.get<GetDecksResponseType>('v2/decks')
   },
 }
