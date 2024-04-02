@@ -1,17 +1,9 @@
 import s from './DecksList.module.css'
-import { useEffect } from 'react'
-import { fetchDecksTC } from '../decks-reducer'
-import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { decksSelector } from '../decks-selectors'
 import { DeckItem } from './DeckItem/DeckItem'
+import { useFetchDecks } from './useFetchDecks'
 
 export const DecksList = () => {
-  const decks = useAppSelector(decksSelector)
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(fetchDecksTC())
-  }, [])
+  const { decks } = useFetchDecks()
 
   return (
     <ul className={s.list}>
